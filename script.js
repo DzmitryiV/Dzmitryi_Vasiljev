@@ -1,17 +1,18 @@
-function sum(a) {
-        let numb = a
-        function sum2(b){
-        numb += b;
-        return sum2;
-    }
-    sum2.toString = function () {
-            console.log(numb)
-        return numb;
-    };
-    return sum2;
-    }
-    
-   
-    console.log( sum(1)(2) ); 
-    console.log( sum(1)(2)(3) ); 
+const Contains = document.body.getElementsByTagName('div');
+console.log(Contains);
 
+for (i = 0; i <= Contains.length; i++) {
+    console.log(Contains[i])
+    Contains[i].style.background = Contains[i].className;
+
+}
+
+
+const Container = document.body.getElementsByTagName('div');
+for (i = 1; i <= Container.length; i++) {
+
+
+   Container[i] = Container[i-1].appendChild(Container[i]);
+
+}
+console.log(Container)
