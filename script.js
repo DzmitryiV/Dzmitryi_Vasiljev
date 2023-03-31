@@ -1,7 +1,7 @@
 const Contains = document.body.getElementsByTagName('div');
 console.log(Contains);
 
-for (i = 0; i <= Contains.length; i++) {
+for (i = 1; i < Contains.length; i++) {
     console.log(Contains[i])
     Contains[i].style.background = Contains[i].className;
 
