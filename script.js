@@ -149,8 +149,8 @@ function getForm() {
     let formData = new FormData(document.querySelector('form'));
     let a = '';
     for (i = 0; i < data.length; i++) {
-        console.log(formData.get(data[i].name));
-        a += formData.get(data[i].name);
+        console.log(formData.get(data[i].id));
+        a += formData.get(data[i].id);
         return a
     }
 }
@@ -163,9 +163,5 @@ Submit.formMethod = 'get'
 
 Submit.addEventListener("click", getForm);
 
-form.addEventListener('submit', function () {
-    console.log(data[i].name);
-    return false;
-}
-    , false);
+
 
