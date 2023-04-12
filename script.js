@@ -66,28 +66,31 @@ for (var i = 0; i < data.length; i++) {
         Name.setAttribute("type", (data[i].type));
         Name.setAttribute("id", (data[i].id));
         Name.setAttribute("value", (data[i].value));
-        Name.setAttribute("surname", (data[i].placeholder))
+        Name.setAttribute("name", (data[i].placeholder))
         form.append(label);
         form.append(Name);
 
-
-    }
-    else if (data[i].id === "birthday") {
-        let Name = document.createElement("input");
-        const label = document.createElement('label');
-        label.innerText = 'birthday';
-        Name.setAttribute("type", (data[i].type));
-        Name.setAttribute("id", (data[i].id));
-        Name.setAttribute("value", (data[i].value));
-        Name.setAttribute("placeholder", (data[i].placeholder))
-        form.append(label);
-        form.append(Name);
 
     }
 }
 
 
 data.forEach((elem) => {
+    if (elem.type === 'date') {
+        const input = document.createElement('input');
+        const label = document.createElement('label');
+
+        input.type = elem.type;
+        input.value = elem.value;
+        input.id = elem.id;
+        input.name = elem.id;
+
+        label.setAttribute('for', elem.id)
+        label.innerText = elem.id
+
+        form.append(label);
+        form.append(input);
+    }
 
     if (elem.type === 'radio') {
 
@@ -108,27 +111,22 @@ data.forEach((elem) => {
             form.append(label);
         })
     }
+
     if (elem.type === 'checkbox') {
+
         const input = document.createElement('input');
         const label = document.createElement('label');
-
         label.innerText = 'time:'
         form.append(label)
-
-        input.type = elem.type
-        input.value = elem.value
-
+        input.type = 'checkbox'
         elem.options.map(function (item, index) {
-
-            let input = document.createElement('input');
-            let label = document.createElement('label');
-
-            input.name = elem.options[index];
-            input.type = elem.type;
-
+            const input = document.createElement('input');
+            const label = document.createElement('label');
+            input.name = elem.id;
+            input.type = 'checkbox';
             label.id = elem.options[index];
             label.textContent = elem.options[index];
-
+            input.value = label.id;
             form.append(input);
             form.append(label);
         })
@@ -147,13 +145,22 @@ document.querySelector('form').addEventListener('submit', (e) => {
 
 function getForm() {
     let formData = new FormData(document.querySelector('form'));
-    let a = '';
+    let a = new Object();
+
+
     for (i = 0; i < data.length; i++) {
-        console.log(formData.get(data[i].id));
+
+        console.log(data[i].id + ":" + formData.get(data[i].id));
+
         a += formData.get(data[i].id);
-        return a
-    }
+
+
+    } return (a);
+
 }
+
+
+
 
 let Submit = document.createElement('input');
 document.body.append(Submit);
@@ -163,5 +170,6 @@ Submit.formMethod = 'get'
 
 Submit.addEventListener("click", getForm);
 
-
-
+form.addEventListener( 'keydown', event => {
+    if( event.code === 'Enter' ) getForm();
+  });
