@@ -32,144 +32,103 @@ const data = [
         placeholder: "select timeslot for assessment",
     },
 ];
+
 data.forEach(function (record) {
     if (record.type === "toggle") {
         record.type = "radio";
     }
 });
 
-
-
-
 let form = document.createElement('form');
 
+function createForm() {
+
+    data.forEach((elem) => {
+        if (elem.type != "radio" && elem.type != "checkbox") {
+
+
+            const input = document.createElement('input');
+            const label = document.createElement('label');
+            const br = document.createElement("br")
+
+            input.type = elem.type;
+
+            input.value = elem.value;//////
+            input.id = elem.id;
+            input.name = elem.id;
+
+            label.setAttribute('for', elem.id)
+            label.innerText = elem.id
+
+            form.append(label);
+            form.append(input);
+            form.append(br)
+
+        }
+
+
+        if (elem.type === 'radio' || elem.type === 'checkbox') {
+
+            const input = document.createElement('input');
+            const label = document.createElement('label');
+            const br = document.createElement("br")
+
+            label.innerText = elem.id + ":";
+            form.append(label)
+            input.type = elem.type
+            elem.options.map(function (item, index) {
+                const input = document.createElement('input');
+                const label = document.createElement('label');
+                input.name = elem.id;
+                input.type = elem.type;
+                label.id = elem.options[index];
+                label.textContent = elem.options[index];
+                input.value = elem.options[index];
+                form.append(input);
+                form.append(label);
+                form.append(br)
+            })
+        }
+
+
+
+    })
+
+
+
+    let submit = document.createElement('input');
+    submit.setAttribute("type", "submit");
+    submit.formMethod = 'get';
+
+    form.append(submit);
+
+
+
+    form.addEventListener("submit", getForm);
+
+    document.querySelector('form').addEventListener('submit', (e) => {
+        const formData = new FormData(e.target);
+        e.preventDefault();
+        
+    })
+
+
+
+    function getForm() {
+        let formData = new FormData(document.querySelector('form'));
+        let a = new Object();
+
+
+        for (i = 0; i < data.length; i++) {
+
+            console.log(data[i].id + ":" + formData.get(data[i].id));
+
+            a += formData.get(data[i].id);
+
+
+        } return (a);
+    }
+}
 document.body.prepend(form);
 
-for (var i = 0; i < data.length; i++) {
-    if (data[i].id === "name") {
-        let Name = document.createElement("input");
-        const label = document.createElement('label');
-        label.innerText = 'name';
-        form.append(label);
-        form.append(Name);
-        Name.setAttribute("type", (data[i].type));
-        Name.setAttribute("id", (data[i].id));
-        Name.setAttribute("value", (data[i].value));
-        Name.setAttribute("name", (data[i].placeholder))
-
-
-    }
-    else if (data[i].id === "surname") {
-        let Name = document.createElement("input");
-        const label = document.createElement('label');
-        label.innerText = 'surname';
-        Name.setAttribute("type", (data[i].type));
-        Name.setAttribute("id", (data[i].id));
-        Name.setAttribute("value", (data[i].value));
-        Name.setAttribute("name", (data[i].placeholder))
-        form.append(label);
-        form.append(Name);
-
-
-    }
-}
-
-
-data.forEach((elem) => {
-    if (elem.type === 'date') {
-        const input = document.createElement('input');
-        const label = document.createElement('label');
-
-        input.type = elem.type;
-        input.value = elem.value;
-        input.id = elem.id;
-        input.name = elem.id;
-
-        label.setAttribute('for', elem.id)
-        label.innerText = elem.id
-
-        form.append(label);
-        form.append(input);
-    }
-
-    if (elem.type === 'radio') {
-
-        const input = document.createElement('input');
-        const label = document.createElement('label');
-        label.innerText = 'sex:'
-        form.append(label)
-        input.type = 'radio'
-        elem.options.map(function (item, index) {
-            const input = document.createElement('input');
-            const label = document.createElement('label');
-            input.name = elem.id;
-            input.type = 'radio';
-            label.id = elem.options[index];
-            label.textContent = elem.options[index];
-            input.value = label.id;
-            form.append(input);
-            form.append(label);
-        })
-    }
-
-    if (elem.type === 'checkbox') {
-
-        const input = document.createElement('input');
-        const label = document.createElement('label');
-        label.innerText = 'time:'
-        form.append(label)
-        input.type = 'checkbox'
-        elem.options.map(function (item, index) {
-            const input = document.createElement('input');
-            const label = document.createElement('label');
-            input.name = elem.id;
-            input.type = 'checkbox';
-            label.id = elem.options[index];
-            label.textContent = elem.options[index];
-            input.value = label.id;
-            form.append(input);
-            form.append(label);
-        })
-    }
-})
-
-
-
-document.querySelector('form').addEventListener('submit', (e) => {
-    const formData = new FormData(e.target);
-    e.preventDefault();
-    console.log(formData.get('name'));
-})
-
-
-
-function getForm() {
-    let formData = new FormData(document.querySelector('form'));
-    let a = new Object();
-
-
-    for (i = 0; i < data.length; i++) {
-
-        console.log(data[i].id + ":" + formData.get(data[i].id));
-
-        a += formData.get(data[i].id);
-
-
-    } return (a);
-
-}
-
-
-
-
-let Submit = document.createElement('input');
-document.body.append(Submit);
-Submit.setAttribute("type", "submit")
-Submit.formMethod = 'get'
-
-
-Submit.addEventListener("click", getForm);
-
-form.addEventListener( 'keydown', event => {
-    if( event.code === 'Enter' ) getForm();
-  });
+createForm(data)
