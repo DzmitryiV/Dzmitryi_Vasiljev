@@ -80,7 +80,7 @@
     font-weight: bold;
     font-weight: 500;
     font-size: 16px;
-   
+
 }
 
 .navbar_menu a {
@@ -173,10 +173,181 @@
     font-weight: 500;
     font-size: 18px;
 }
-.footer{
+
+.footer {
     display: flex;
-    background-color:  #555555;
+    background-color: #555555;
     height: 50px;
     align-items: center;
     justify-content: center;
+}
+
+.modale {
+    background-color: #232323;
+    z-index: 99;
+    width: 564px;
+    height: 553px;
+
+
+}
+
+.label_style {
+    color: #F65261;
+
+}
+
+.search_form_modale {
+    background: rgba(50, 50, 50, 0.8);
+    mix-blend-mode: normal;
+    opacity: 0.7;
+    border-radius: 4px;
+    width: 300px;
+    height: 20px;
+    color: #E4E4E4;
+}
+
+
+.form_style {
+    display: grid;
+
+    justify-content: center;
+    justify-items: stretch;
+}
+
+#overview {
+    width: 300px;
+    height: 93px;
+}
+
+#date {
+    background: rgba(50, 50, 50, 0.8);
+    mix-blend-mode: normal;
+    opacity: 0.7;
+    border-radius: 4px;
+    width: 300px;
+    color: #E4E4E4;
+}
+
+#reset {
+    background-color: #232323;
+    color: #F65261;
+    width: 233px;
+    height: 35px;
+    border-radius: 4px;
+    mix-blend-mode: normal;
+    margin-left: 10%;
+}
+.modale{
+    display: none;
+}
+
+
+@media all and (max-device-width: 361px) {
+    .body {
+        width: 100vw;
+        display: block;
+    }
+    .modale{
+        display: none;
+        width: 100vw;
+        
+    }
+    
+    .navbar_menu {
+        display: inline-block;
+        white-space: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        margin-left: 5px;
+    }
+
+    .navbar_menu a {
+        display: inline-block;
+        padding: 5px;
+    }
+
+    .content_navbar_menu {
+        display: inline-block;
+        white-space: nowrap;
+        overflow-x: auto;
+        width: 359px;
+    }
+
+    .sort {
+        float: left;
+        margin-left: 5%;
+    }
+
+    .header {
+        height: 222px;
+
+    }
+
+    div .header {
+        display: inline-block;
+    }
+
+    .add_movie {
+        float: left;
+        margin-top: 82px;
+        margin-left: 20%;
+    }
+
+    .netflixroolete {
+        margin-left: 10%;
+    }
+
+    .search {
+        position: absolute;
+        left: 50px;
+        top: 117px;
+    }
+
+    .search_form {
+        width: 225px;
+    }
+
+    .content {
+        position: absolute;
+        top: 338px;
+        width: 360px;
+    }
+
+    .footer {
+        display: none;
+
+    }
+
+}
+
+@media all and (max-device-width: 740px) and (orientation:landscape) {
+    .body {
+        width: 740px;
+    }
+    .modale{
+        display: none;
+        width: 100vw;
+        
+    }
+
+    .header {
+        height: 123px;
+    }
+
+    .search_form {
+        width: 253px;
+    }
+
+    .navbar_menu {
+        width: 100%;
+    }
+
+    .content div {
+        width: 232px;
+        margin: 5px;
+    }
+
+    .title_and_yeahr {
+        width: 232px;
+    }
 }
