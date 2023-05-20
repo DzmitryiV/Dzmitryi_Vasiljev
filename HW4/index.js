@@ -11,13 +11,13 @@ function createPage() {
         Promise.allSettled(galery)
             .then(galery.forEach(function (element) {
                 let listLi = document.createElement("li");
-                list.append(listLi);
+              
                 let source = document.createElement("img");
                 source.setAttribute("src", element);
                 source.className = "galeryClass";
 
                 listLi.append(source);
-
+                list.append(listLi);
                 source.addEventListener('click', function (e) {
                     if (document.querySelector('a') != null) {
                         document.querySelector('a').remove();
